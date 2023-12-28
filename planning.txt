@@ -1,0 +1,32 @@
+
+
+#1 ... Hello World up and running. Sill  stick figure moves across the screen. 
+
+
+TODO
+=======
+1. Set up the game board with line. 
+2. Set up the defender, for now the defender will be a house. The defener is a static picture 
+3. Set up the attacker. 
+4. Set up the electric line.
+5. Make the attacker move. 
+6. Connect keyboard, space button, so that when pressed the fence is electrified. 
+7. have a different animation for when the fence is electrified. 
+8. have a different animation for when the attacker is electrified. 
+9. have a different animation for when the house is lost. 
+10. adding sound effects.
+    a) attacker coming
+    b) electric fence active
+    c) attacker being electrified
+    d) house is lost. 
+
+
+
+
+
+GOAL --- MVP
+1. A figure moves from left to right. 
+2. There's an electric line on the right side of the screen. Behind the line is a defender. 
+3. If the defender. hits the electric-on button, then the fence will be electrified for 1 second. 
+4. If the attacker touches the electrified line, the attacker will be electrocuted for 1 second die. 
+5. If the attacker walks past the line, without being electrified, then the defener will loose. 
