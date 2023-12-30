@@ -1,1 +1,1 @@
-#Holds game settings/constants - window size, colors, etc
+# Holds game settings/constants - window size, colors, etc
