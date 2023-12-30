@@ -19,6 +19,7 @@ TODO
 7. Keyboard Interaction: Connect keyboard, particularly space button, so that pressing it electrifies the fence.
 8. Fence Animation: Create an animation or visual effect for when the fence is electrified.
 9. Implement Collision Detection: While the fence is electrified, if the attacker comes in contact, then trigger a certain response (like ending game, reducing attacker's health etc).
+
 10.Attacker Electrification Animation: Have a different animation for when the attacker is electrified.
 11. Defender Loss Animation: Have a different animation for when the house is lost/attacked.
 12.  Implement Sound Effects: Add sound effects for various events as specified.
