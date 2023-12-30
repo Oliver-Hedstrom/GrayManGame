@@ -1,1 +1,1 @@
-#Manages the sound effects.
+# Manages the sound effects.
