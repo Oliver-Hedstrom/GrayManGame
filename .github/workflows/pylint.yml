@@ -6,6 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3
+      - run: pip install --upgrade pip
       - run: pip install bandit black codespell flake8 isort mypy pytest pyupgrade safety pylint
       - run: bandit --recursive --skip B101 . || true  # B101 is assert statements
       - run: black --check . || true
