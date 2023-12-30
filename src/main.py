@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 import sys
 from animation import animate_attacker 
+from input import handle_input
 
 pygame.init()
 
@@ -12,13 +13,13 @@ FPS = 60
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREY = (128, 128, 128)
-
+YELLOW = (255, 255, 0)
 
 
 screen_info = pygame.display.Info()
 # Calculate 90% of the screen width
-screen_width = int(screen_info.current_w/2)
-screen_height = int(screen_info.current_h/4)
+screen_width = int(screen_info.current_w)
+screen_height = int(screen_info.current_h)
 
 screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
@@ -36,10 +37,15 @@ fence_rect = fence_image.get_rect()
 fence_x_position = int(screen_width * 0.75)
 fence_width = fence_rect.width
 # Calculate how many times the image should be repeated to fill the screen height
-repeat_count = screen_height // fence_rect.height + 1
+fence_count = screen_height // fence_rect.height + 1
 
 
-while running:
+game_state = {
+    'running' : True, 
+    'fence_electrified' : False,
+}
+
+while game_state['running']:
     clock.tick(FPS)
     
     for event in pygame.event.get():
@@ -50,26 +56,22 @@ while running:
     screen.fill(GREY)
 
     # Blit the scaled fence image repeatedly to create a contiguous line
-    for i in range(repeat_count):
+    for i in range(fence_count):
         screen.blit(fence_image, (fence_x_position, i * fence_rect.height))
 
-# ... rest of your game loop code ...
-
-    
-    # Blit each line of ASCII art as a separate text Surface
-    # for i, line in enumerate(stick_figure):
-    #     s = font.render(line, True, WHITE)
-    #     pos = (distance, i * 50)  # 50 is roughly the height of each line
-    #     screen.blit(s, pos)
+    handle_input(pygame.event.get(), game_state)
+    if (game_state['fence_electrified']):
+        # Draw a yellow outline around the fence -- temporary fix until we have graphical representation of 
+        # electrified fence. 
+        for i in range(fence_count):
+            pygame.draw.rect(screen, YELLOW, (fence_x_position, i * fence_rect.height, fence_rect.width, fence_rect.height), 1)
     animate_attacker(screen, font, distance, fence_x_position, fence_width, distance)
     
     distance += 1  # Move 1px/frame to the right
-
-    # If figure moved off screen, reset back to left edge
-    if distance > screen_width:
+    if distance > screen_width: # If figure moved off screen, reset back to left edge
         distance = 0
-    
-    # Flip the display
+
+    # Flip the display (double buffering, so we are drawing on the unused screen, then show by flipping)
     pygame.display.flip()
 
 pygame.quit()

@@ -1,6 +1,11 @@
 
 
 #1 ... Hello World up and running. Sill  stick figure moves across the screen. 
+#2 ... simple collision + start animation of stick figure and fence. 
+#3 ---> FRIDAY: Make the animation walk nicely across the screen. 
+
+
+
 
 
 TODO
