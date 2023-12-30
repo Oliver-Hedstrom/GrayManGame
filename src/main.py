@@ -40,23 +40,17 @@ fence_count = screen_height // fence_rect.height + 1
 game_state = {
     "running": True,
     "fence_electrified": False,
+    "zapped": False,
+    "zapped_progress": 0,
 }
 
-while game_state["running"]:
-    clock.tick(FPS)
-    events = pygame.event.get()
-    handle_input(events, game_state)
 
-    # Fill the screen with black
-    screen.fill(COLORS["GREY"])
-
-    # Blit the scaled fence image repeatedly to create a contiguous line
-    for i in range(fence_count):
-        screen.blit(fence_image, (fence_x_position, i * fence_rect.height))
+def fence_electrification(
+    screen, fence_rect, fence_x_position, fence_count, game_state
+):
     if game_state["fence_electrified"]:
         # Draw a yellow outline around the fence -- temporary fix until we have graphical representation of
         # electrified fence.
-
         for i in range(fence_count):
             pygame.draw.rect(
                 screen,
@@ -69,13 +63,29 @@ while game_state["running"]:
                 ),
                 1,
             )
+
+
+while game_state["running"]:
+    clock.tick(FPS)
+    events = pygame.event.get()
+    handle_input(events, game_state)
+
+    # Fill the screen with black
+    screen.fill(COLORS["GREY"])
+
+    # Blit the scaled fence image repeatedly to create a contiguous line
+    for i in range(fence_count):
+        screen.blit(fence_image, (fence_x_position, i * fence_rect.height))
+    fence_electrification(screen, fence_rect, fence_x_position, fence_count, game_state)
     animate_attacker(
         screen, font, distance, fence_x_position, fence_width, distance, game_state
     )
 
     distance += 1  # Move 1px/frame to the right
-    if distance > screen_width:  # If figure moved off screen, reset back to left edge
+    if distance > screen_width:
         distance = 0
+        game_state["zapped"] = False
+        game_state["zapped_progress"] = 0
 
     # Flip the display (double buffering, so we are drawing on the unused screen, then show by flipping)
     pygame.display.flip()
