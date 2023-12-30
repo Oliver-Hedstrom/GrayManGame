@@ -49,10 +49,8 @@ game_state = {
 
 while game_state["running"]:
     clock.tick(FPS)
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+    events = pygame.event.get()
+    handle_input(events, game_state)
 
     # Fill the screen with black
     screen.fill(GREY)
@@ -60,11 +58,10 @@ while game_state["running"]:
     # Blit the scaled fence image repeatedly to create a contiguous line
     for i in range(fence_count):
         screen.blit(fence_image, (fence_x_position, i * fence_rect.height))
+    if (game_state['fence_electrified']):
+        # Draw a yellow outline around the fence -- temporary fix until we have graphical representation of 
+        # electrified fence. 
 
-    handle_input(pygame.event.get(), game_state)
-    if game_state["fence_electrified"]:
-        # Draw a yellow outline around the fence -- temporary fix until we have graphical representation of
-        # electrified fence.
         for i in range(fence_count):
             pygame.draw.rect(
                 screen,
