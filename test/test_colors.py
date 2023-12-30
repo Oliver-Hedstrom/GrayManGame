@@ -2,8 +2,9 @@ import unittest
 import sys
 import os
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../src")))
 from colors import COLORS
+
 
 class TestColorConstants(unittest.TestCase):
     # Verify that colors are following the RGB format (X, Y, Z) where the numbers are 0 ... 255
@@ -17,5 +18,6 @@ class TestColorConstants(unittest.TestCase):
                     self.assertGreaterEqual(value, 0)
                     self.assertLessEqual(value, 255)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
