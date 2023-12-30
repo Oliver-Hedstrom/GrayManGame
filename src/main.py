@@ -74,7 +74,7 @@ while game_state["running"]:
                 ),
                 1,
             )
-    animate_attacker(screen, font, distance, fence_x_position, fence_width, distance)
+    animate_attacker(screen, font, distance, fence_x_position, fence_width, distance, game_state)
 
     distance += 1  # Move 1px/frame to the right
     if distance > screen_width:  # If figure moved off screen, reset back to left edge

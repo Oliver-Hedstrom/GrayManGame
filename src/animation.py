@@ -27,15 +27,17 @@ def check_collision(attacker_pos, fence_x_position, fence_width):
 
 
 def animate_attacker(
-    screen, font, attacker_pos, fence_x_position, fence_width, distance
+    screen, font, attacker_pos, fence_x_position, fence_width, distance, game_state
 ):
     # Define colors
     RED = (255, 0, 0)
     WHITE = (255, 255, 255)
 
+    electricity_activity =  game_state["fence_electrified"]
+
     # Check for collision
     collision = check_collision(attacker_pos, fence_x_position, fence_width)
-    current_figure = electric_impact_figure if collision else stick_figure
+    current_figure = electric_impact_figure if (collision and electricity_activity) else stick_figure
 
     # Determine the color based on collision
     color = RED if collision and (pygame.time.get_ticks() // 250) % 2 else WHITE
