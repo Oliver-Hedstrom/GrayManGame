@@ -3,23 +3,19 @@ from pygame.locals import *
 import sys
 from animation import animate_attacker
 from input import handle_input
-
+from colors import COLORS
 pygame.init()
 
 # Constants
 FPS = 60
 
-# Colors
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-GREY = (128, 128, 128)
-YELLOW = (255, 255, 0)
+
 
 
 screen_info = pygame.display.Info()
 # Calculate 90% of the screen width
-screen_width = int(screen_info.current_w)
-screen_height = int(screen_info.current_h)
+screen_width = int(screen_info.current_w/2)
+screen_height = int(screen_info.current_h/2)
 
 screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
@@ -53,7 +49,7 @@ while game_state["running"]:
     handle_input(events, game_state)
 
     # Fill the screen with black
-    screen.fill(GREY)
+    screen.fill(COLORS['GREY'])
 
     # Blit the scaled fence image repeatedly to create a contiguous line
     for i in range(fence_count):
@@ -65,7 +61,7 @@ while game_state["running"]:
         for i in range(fence_count):
             pygame.draw.rect(
                 screen,
-                YELLOW,
+                COLORS['YELLOW'],
                 (
                     fence_x_position,
                     i * fence_rect.height,
