@@ -11,3 +11,5 @@ def handle_input(events, game_state):
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_SPACE:
                 game_state['fence_electrified'] = False
+        elif event.type == pygame.QUIT:
+            running = False
