@@ -5,6 +5,8 @@ from colors import COLORS
 
 # Constants for the figures
 STICK_FIGURE = [" O ", "-|-", "/ \\"]
+STICK_FIGURE_SIZE = STICK_FIGURE[0].count(" ")
+
 ELECTRIC_IMPACT_FIGURE = [" \\O/ ", " -|- ", " / \\ "]
 
 
@@ -39,7 +41,7 @@ def update_zapped_state(game_state, current_figure):
     ]
     game_state["zapped_progress"] += 1
 
-    if zapped_progress >= len(current_figure[0]):
+    if zapped_progress > STICK_FIGURE_SIZE:
         game_state["zapped_progress"] = 0
         game_state["zapped"] = False
 
